@@ -100,6 +100,7 @@ const postPokemon = async (req, res) => {
 			});
 		}
 	}
+    // Validar que el nombre no se repita
 	const repeatedPokemon = await Pokemon.findOne({ where: { name } });
 	if (repeatedPokemon) {
 		return res
