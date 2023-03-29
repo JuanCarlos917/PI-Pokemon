@@ -11,7 +11,7 @@ for (let index = 1; index < 10; index++) {
 console.log(allPokemons);
 const getPokemons = async (req, res) => {
 	let pokemons = [];
-    console.log(pokemons);
+	console.log(pokemons);
 
 	await Promise.all(allPokemons.map((promise) => axios.get(promise)))
 		.then((response) => {
@@ -100,7 +100,12 @@ const postPokemon = async (req, res) => {
 			});
 		}
 	}
-
+	const repeatedPokemon = await Pokemon.findOne({ where: { name } });
+	if (repeatedPokemon) {
+		return res
+			.status(409)
+			.json({ error: 'Some pokemon already exist with that name' });
+	}
 	try {
 		const newPokemon = await Pokemon.create({
 			name,
@@ -120,7 +125,4 @@ const postPokemon = async (req, res) => {
 	}
 };
 
-
-
-module.exports = {getPokemons, postPokemon}
-
+module.exports = { getPokemons, postPokemon };
