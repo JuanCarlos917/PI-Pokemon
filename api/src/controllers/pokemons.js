@@ -114,21 +114,6 @@ const postPokemon = async (req, res) => {
 			.json({ error: 'Some pokemon already exist with that name' });
 	}
 
-	// Validar que el tipo exista
-	const type = await Type.findOne({ where: { name: type1 } });
-	if (!type) {
-		return res.status(400).json({ error: 'Type not found' });
-	}
-
-	// se agrega tipo a la db
-	const typeAdd1 = await Type.findOne({
-		where: {
-			name_type: type1,
-		},
-	});
-
-	await newPokemon.addType(typeAdd1, { through: PokemonType });
-
 	try {
 		const newPokemon = await Pokemon.create({
 			name,
@@ -141,6 +126,13 @@ const postPokemon = async (req, res) => {
 			image,
 			type1,
 		});
+		// se agrega tipo a la db
+		const typeAdd1 = await Type.findOne({
+			where: {
+				name_type: type1,
+			},
+		});
+        await newPokemon.addType(typeAdd1, { through: PokemonType });
 
 		return res.status(200).json(newPokemon);
 	} catch (err) {
