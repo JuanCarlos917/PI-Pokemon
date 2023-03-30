@@ -1,20 +1,20 @@
 const axios = require('axios');
-const { Pokemon } = require('../db');
-const { Type } = require('../db');
-const { PokemonType } = require('../db');
-
+const { PokemonType, Type, Pokemon } = require('../db');
+//array contenedora de los pokemones
 const allPokemons = [];
 
 for (let index = 1; index < 10; index++) {
 	allPokemons.push(`https://pokeapi.co/api/v2/pokemon/${index}`);
 }
-console.log(allPokemons);
+
+//Se obtiene los pokemons de la API y los almacena en un array
 const getPokemons = async (req, res) => {
 	let pokemons = [];
-	console.log(pokemons);
 
+	// Se utiliza Promise.all para hacer todas las llamadas a la API al mismo tiempo
 	await Promise.all(allPokemons.map((promise) => axios.get(promise)))
 		.then((response) => {
+			// Se recorre el array de respuestas y se almacena la información de cada pokemon en el array pokemons[]
 			for (let i = 0; i < response.length; i++) {
 				let data = response[i].data;
 				pokemons.push({
@@ -27,6 +27,7 @@ const getPokemons = async (req, res) => {
 					speed: data.stats[5].base_stat,
 					height: data.height,
 					weight: data.weight,
+					type1: data.types[0].type.name,
 				});
 			}
 		})
@@ -38,7 +39,7 @@ const getPokemons = async (req, res) => {
 
 	try {
 		const { id } = req.params;
-
+		//Si se recibe un id como parametro en la URL, se busca el pokemon  en el array pokemons[] y se retorna
 		if (id) {
 			const idPokemon = pokemons.find((pokemon) => {
 				return pokemon.id == id;
@@ -49,11 +50,12 @@ const getPokemons = async (req, res) => {
 	} catch {
 		console.log('Pokemon id required');
 	}
+	//si el array de pokemos[] esta vacio, se retornan todos los pokemones
 	if (pokemons.length > 0) res.status(200).json(pokemons);
 
 	try {
 		const dbPokemons = await Pokemon.findAll();
-
+		// Si hay pokemons en la base de datos, se agregan al array pokemons[]
 		pokemons = pokemons.concat(dbPokemons);
 	} catch (error) {
 		console.log('pokemon not found in DB');
@@ -65,7 +67,7 @@ const getPokemons = async (req, res) => {
 		if (!name) {
 			throw new Error('Name parameter is required');
 		}
-
+		// Se busca el pokemon con el nombre correspondiente en el array pokemons
 		const queryPokemon = pokemons.find((pokemon) => {
 			return pokemon.name.toLowerCase() === name.toLowerCase();
 		});
@@ -81,7 +83,7 @@ const getPokemons = async (req, res) => {
 };
 
 const postPokemon = async (req, res) => {
-	const { name, hp, attack, defense, speed, height, weight, image } =
+	const { name, hp, attack, defense, speed, height, weight, image, type1 } =
 		req.body;
 
 	// Validar que el nombre del pokemon exista
@@ -100,7 +102,7 @@ const postPokemon = async (req, res) => {
 			});
 		}
 	}
-    // Validar que el nombre no se repita
+	// Validar que el nombre no se repita
 	const repeatedPokemon = await Pokemon.findOne({ where: { name } });
 	if (repeatedPokemon) {
 		return res
@@ -117,7 +119,16 @@ const postPokemon = async (req, res) => {
 			height,
 			weight,
 			image,
+			type1,
 		});
+		// se agrega tipo a la db
+		const typeAdd1 = await Type.findOne({
+			where: {
+				name_type: type1,
+			},
+		});
+
+		await newPokemon.addType(typeAdd1, { through: PokemonType });
 
 		return res.status(200).json(newPokemon);
 	} catch (err) {

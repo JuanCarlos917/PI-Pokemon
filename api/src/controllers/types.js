@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Type } = require('../db');
-
+//obiene todos los tipos de Pokemon de la API y almacenarlos en la base de datos
 const getAllTypesFromApi = async () => {
 	const types = [];
 
@@ -18,7 +18,7 @@ const getAllTypesFromApi = async () => {
 
 	return types;
 };
-
+//unción principal que se exporta a través del módulo para obtener la lista de tipos de Pokemon
 const getTypes = async (req, res) => {
 	try {
 		let types = await Type.findAll();
@@ -26,7 +26,7 @@ const getTypes = async (req, res) => {
 		if (types.length === 0) {
 			types = await getAllTypesFromApi();
 		}
-
+        //devuelve la lista de los tipos de pokemones
 		res.status(200).json(types);
 	} catch (error) {
 		res.status(400).json({
