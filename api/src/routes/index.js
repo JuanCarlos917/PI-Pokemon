@@ -9,7 +9,7 @@ const { getTypes } = require('../controllers/types');
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/pokemons', getPokemons)
 router.get('/pokemons/:id', getPokemons);
-router.get('/pokemons/name?=', getPokemons);
+router.get('/pokemons/name', getPokemons);
 router.post('/pokemons', postPokemon);
 router.get('/types', getTypes);
 module.exports = router;
