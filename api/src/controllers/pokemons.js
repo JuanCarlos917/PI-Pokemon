@@ -8,7 +8,8 @@ for (let index = 1; index < 10; index++) {
 }
 
 //Se obtiene los pokemons de la API y los almacena en un array
-const getPokemons = async (req, res) => {
+// Se agregó un parámetro next a la función para permitir pasar errores al middleware siguiente
+const getPokemons = async (req, res, next) => {
 	let pokemons = [];
 
 	// Se utiliza Promise.all para hacer todas las llamadas a la API al mismo tiempo
@@ -78,7 +79,10 @@ const getPokemons = async (req, res) => {
 
 		return res.status(200).json(queryPokemon);
 	} catch (err) {
-		return res.status(400).send(err.message);
+        // return res.status(400).send(err.message);
+
+        // En lugar de enviar una respuesta de error al cliente con res.status(400).send(err.message), se llama a next(err) para indicar que ocurrió un error y enviarlo al siguiente middleware
+        next(err);
 	}
 };
 
@@ -109,6 +113,22 @@ const postPokemon = async (req, res) => {
 			.status(409)
 			.json({ error: 'Some pokemon already exist with that name' });
 	}
+
+	// Validar que el tipo exista
+	const type = await Type.findOne({ where: { name: type1 } });
+	if (!type) {
+		return res.status(400).json({ error: 'Type not found' });
+	}
+
+	// se agrega tipo a la db
+	const typeAdd1 = await Type.findOne({
+		where: {
+			name_type: type1,
+		},
+	});
+
+	await newPokemon.addType(typeAdd1, { through: PokemonType });
+
 	try {
 		const newPokemon = await Pokemon.create({
 			name,
@@ -121,14 +141,6 @@ const postPokemon = async (req, res) => {
 			image,
 			type1,
 		});
-		// se agrega tipo a la db
-		const typeAdd1 = await Type.findOne({
-			where: {
-				name_type: type1,
-			},
-		});
-
-		await newPokemon.addType(typeAdd1, { through: PokemonType });
 
 		return res.status(200).json(newPokemon);
 	} catch (err) {
