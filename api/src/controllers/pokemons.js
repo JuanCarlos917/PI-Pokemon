@@ -7,10 +7,9 @@ for (let index = 1; index < 10; index++) {
 	allPokemons.push(`https://pokeapi.co/api/v2/pokemon/${index}`);
 }
 
+const pokemons = [];
 //Se obtiene los pokemons de la API y los almacena en un array
 const getPokemons = async (req, res) => {
-	let pokemons = [];
-
 	// Se utiliza Promise.all para hacer todas las llamadas a la API al mismo tiempo
 	await Promise.all(allPokemons.map((promise) => axios.get(promise)))
 		.then((response) => {
@@ -37,29 +36,29 @@ const getPokemons = async (req, res) => {
 			});
 		});
 
-	try {
-		const { id } = req.params;
-		//Si se recibe un id como parametro en la URL, se busca el pokemon  en el array pokemons[] y se retorna
-		if (id) {
-			const idPokemon = pokemons.find((pokemon) => {
-				return pokemon.id == id;
-			});
+	// try {
+	// 	const { id } = req.params;
+	// 	//Si se recibe un id como parametro en la URL, se busca el pokemon  en el array pokemons[] y se retorna
+	// 	if (id) {
+	// 		const idPokemon = pokemons.find((pokemon) => {
+	// 			return pokemon.id == id;
+	// 		});
 
-			return res.status(200).json(idPokemon);
-		}
-	} catch {
-		console.log('Pokemon id required');
-	}
-	//si el array de pokemos[] esta vacio, se retornan todos los pokemones
-	if (pokemons.length > 0) res.status(200).json(pokemons);
+	// 		return res.status(200).json(idPokemon);
+	// 	}
+	// } catch {
+	// 	console.log('Pokemon id required');
+	// }
+	// //si el array de pokemos[] esta vacio, se retornan todos los pokemones
+	// if (pokemons.length > 0) res.status(200).json(pokemons);
 
-	try {
-		const dbPokemons = await Pokemon.findAll();
-		// Si hay pokemons en la base de datos, se agregan al array pokemons[]
-		pokemons = pokemons.concat(dbPokemons);
-	} catch (error) {
-		console.log('pokemon not found in DB');
-	}
+	// try {
+	// 	const dbPokemons = await Pokemon.findAll();
+	// 	// Si hay pokemons en la base de datos, se agregan al array pokemons[]
+	// 	pokemons = pokemons.concat(dbPokemons);
+	// } catch (error) {
+	// 	console.log('pokemon not found in DB');
+	// }
 
 	// try {
 	// 	const { name } = req.query;
@@ -84,6 +83,30 @@ const getPokemons = async (req, res) => {
     //     next(err);
 	// }
 };
+const getPokemonsById = async (req, res) => {
+	try {
+		const { id } = req.params;
+		//Si se recibe un id como parametro en la URL, se busca el pokemon en el array pokemons[] y se retorna
+		if (id) {
+			const idPokemon = pokemons.find((pokemon) => {
+				return pokemon.id == id;
+			});
+			return res.status(200).json(idPokemon);
+		}
+	} catch {
+		console.log('Pokemon id required');
+	}
+	//si el array de pokemos[] esta vacio, se retornan todos los pokemones
+	if (pokemons.length > 0) res.status(200).json(pokemons);
+
+	try {
+		const dbPokemons = await Pokemon.findAll();
+		// Si hay pokemons en la base de datos, se agregan al array pokemons[]
+		pokemons = pokemons.concat(dbPokemons);
+	} catch (error) {
+		console.log('pokemon not found in DB');
+	}
+};
 
 const searchPokemonByName = (req, res) => {
 	try {
@@ -101,7 +124,6 @@ const searchPokemonByName = (req, res) => {
 		if (!queryPokemon.length) {
 			throw new Error('There is no pokemon');
 		}
-
 		return res.status(200).json(queryPokemon);
 	} catch (error) {
 		return res.status(400).json({ message: error.message });
@@ -164,6 +186,9 @@ const postPokemon = async (req, res) => {
 	}
 };
 
-module.exports = { getPokemons, postPokemon,
-searchPokemonByName
+module.exports = {
+	getPokemons,
+	postPokemon,
+	searchPokemonByName,
+	getPokemonsById,
 };

@@ -4,6 +4,7 @@ const {
 	getPokemons,
 	postPokemon,
 	searchPokemonByName,
+	getPokemonsById,
 } = require('../controllers/pokemons');
 const { getTypes } = require('../controllers/types');
 // Importar todos los routers;
@@ -11,9 +12,9 @@ const { getTypes } = require('../controllers/types');
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get('/pokemons', getPokemons)
-router.get('/pokemons/:id', getPokemons);
-router.get('/pokemons/?name=', searchPokemonByName);
+router.get('/pokemons/all', getPokemons)
+router.get('/pokemons', searchPokemonByName);
+router.get('/pokemons/:id', getPokemonsById);
 router.post('/pokemons', postPokemon);
 router.get('/types', getTypes);
 module.exports = router;
