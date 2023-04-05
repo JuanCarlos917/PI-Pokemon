@@ -8,8 +8,7 @@ for (let index = 1; index < 10; index++) {
 }
 
 //Se obtiene los pokemons de la API y los almacena en un array
-// Se agregó un parámetro next a la función para permitir pasar errores al middleware siguiente
-const getPokemons = async (req, res, next) => {
+const getPokemons = async (req, res) => {
 	let pokemons = [];
 
 	// Se utiliza Promise.all para hacer todas las llamadas a la API al mismo tiempo
@@ -62,29 +61,53 @@ const getPokemons = async (req, res, next) => {
 		console.log('pokemon not found in DB');
 	}
 
+	// try {
+	// 	const { name } = req.query;
+
+	// 	if (!name) {
+	// 		throw new Error('Name parameter is required');
+	// 	}
+	// 	// Se busca el pokemon con el nombre correspondiente en el array pokemons
+	// 	const queryPokemon = pokemons.filter((pokemon) => {
+	// 		return pokemon.name.toLowerCase().includes(name.toLowerCase());
+	// 	});
+
+	// 	if (!queryPokemon) {
+	// 		throw new Error('There is no pokemon');
+	// 	}
+
+	// 	return res.status(200).json(queryPokemon);
+	// } catch (err) {
+    //     // return res.status(400).send(err.message);
+
+    //     // En lugar de enviar una respuesta de error al cliente con res.status(400).send(err.message), se llama a next(err) para indicar que ocurrió un error y enviarlo al siguiente middleware
+    //     next(err);
+	// }
+};
+
+const searchPokemonByName = (req, res) => {
 	try {
 		const { name } = req.query;
 
 		if (!name) {
 			throw new Error('Name parameter is required');
 		}
-		// Se busca el pokemon con el nombre correspondiente en el array pokemons
-		const queryPokemon = pokemons.find((pokemon) => {
-			return pokemon.name.toLowerCase() === name.toLowerCase();
-		});
 
-		if (!queryPokemon) {
+		// Se busca el pokemon con el nombre correspondiente en el array pokemons
+		const queryPokemon = pokemons.filter((pokemon) => {
+			return pokemon.name.toLowerCase().includes(name.toLowerCase());
+		});
+        console.log(queryPokemon);
+		if (!queryPokemon.length) {
 			throw new Error('There is no pokemon');
 		}
 
 		return res.status(200).json(queryPokemon);
-	} catch (err) {
-        // return res.status(400).send(err.message);
-
-        // En lugar de enviar una respuesta de error al cliente con res.status(400).send(err.message), se llama a next(err) para indicar que ocurrió un error y enviarlo al siguiente middleware
-        next(err);
+	} catch (error) {
+		return res.status(400).json({ message: error.message });
 	}
 };
+
 
 const postPokemon = async (req, res) => {
 	const { name, hp, attack, defense, speed, height, weight, image, type1 } =
@@ -141,4 +164,6 @@ const postPokemon = async (req, res) => {
 	}
 };
 
-module.exports = { getPokemons, postPokemon };
+module.exports = { getPokemons, postPokemon,
+searchPokemonByName
+};
