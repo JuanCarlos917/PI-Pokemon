@@ -2,8 +2,9 @@ const axios = require('axios');
 const { PokemonType, Type, Pokemon } = require('../db');
 //array contenedora de los pokemones
 const allPokemons = [];
+const cantPokemons = 10;
 
-for (let index = 1; index < 10; index++) {
+for (let index = 1; index < cantPokemons ; index++) {
 	allPokemons.push(`https://pokeapi.co/api/v2/pokemon/${index}`);
 }
 
@@ -35,53 +36,6 @@ const getPokemons = async (req, res) => {
 				error: 'error connecting to api',
 			});
 		});
-
-	// try {
-	// 	const { id } = req.params;
-	// 	//Si se recibe un id como parametro en la URL, se busca el pokemon  en el array pokemons[] y se retorna
-	// 	if (id) {
-	// 		const idPokemon = pokemons.find((pokemon) => {
-	// 			return pokemon.id == id;
-	// 		});
-
-	// 		return res.status(200).json(idPokemon);
-	// 	}
-	// } catch {
-	// 	console.log('Pokemon id required');
-	// }
-	// //si el array de pokemos[] esta vacio, se retornan todos los pokemones
-	// if (pokemons.length > 0) res.status(200).json(pokemons);
-
-	// try {
-	// 	const dbPokemons = await Pokemon.findAll();
-	// 	// Si hay pokemons en la base de datos, se agregan al array pokemons[]
-	// 	pokemons = pokemons.concat(dbPokemons);
-	// } catch (error) {
-	// 	console.log('pokemon not found in DB');
-	// }
-
-	// try {
-	// 	const { name } = req.query;
-
-	// 	if (!name) {
-	// 		throw new Error('Name parameter is required');
-	// 	}
-	// 	// Se busca el pokemon con el nombre correspondiente en el array pokemons
-	// 	const queryPokemon = pokemons.filter((pokemon) => {
-	// 		return pokemon.name.toLowerCase().includes(name.toLowerCase());
-	// 	});
-
-	// 	if (!queryPokemon) {
-	// 		throw new Error('There is no pokemon');
-	// 	}
-
-	// 	return res.status(200).json(queryPokemon);
-	// } catch (err) {
-    //     // return res.status(400).send(err.message);
-
-    //     // En lugar de enviar una respuesta de error al cliente con res.status(400).send(err.message), se llama a next(err) para indicar que ocurrió un error y enviarlo al siguiente middleware
-    //     next(err);
-	// }
 };
 const getPokemonsById = async (req, res) => {
 	try {
@@ -94,7 +48,9 @@ const getPokemonsById = async (req, res) => {
 			return res.status(200).json(idPokemon);
 		}
 	} catch {
-		console.log('Pokemon id required');
+		return res
+			.status(400)
+			.json({ error: 'The ID of the pokemon is required' });
 	}
 	//si el array de pokemos[] esta vacio, se retornan todos los pokemones
 	if (pokemons.length > 0) res.status(200).json(pokemons);

@@ -12,11 +12,11 @@ import {
 } from './actions-types';
 import axios from 'axios';
 
-const BACKEND = process.env.REACT_APP_BACK;
+const BACKEND = "http://localhost:3001"
 
 export function getAllPokemons() {
     return async function (dispatch) {
-        const response = await axios.get(`${BACKEND}/pokemons`);
+        const response = await axios.get(`${BACKEND}/pokemons/`);
         return dispatch({
             type: GET_ALL_POKEMONS,
             payload: response.data,

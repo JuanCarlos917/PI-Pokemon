@@ -12,7 +12,7 @@ const { getTypes } = require('../controllers/types');
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get('/pokemons/all', getPokemons)
+router.get('/pokemons/', getPokemons)
 router.get('/pokemons', searchPokemonByName);
 router.get('/pokemons/:id', getPokemonsById);
 router.post('/pokemons', postPokemon);

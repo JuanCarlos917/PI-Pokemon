@@ -1,18 +1,19 @@
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 import Home from './components/Home/Home';
-import DetailPokemon from './components/DetailPokemon/DetailPokemon';
-import FormNewPokemon from './components/FormNewPokemon/FormNewPokemon';
+// import NavBar from './components/NavBar/NavBar';
 
 function App() {
-  return (
+	return (
 		<div className='App'>
-			<LandingPage />
-			<Home />
-			<DetailPokemon />
-            <FormNewPokemon/>
+			<Routes>
+				<Route path='/' element={<LandingPage />} />
+				<Route path='/home' element={<Home />} />
+			</Routes>
 		</div>
-  );
+	);
 }
 
 export default App;

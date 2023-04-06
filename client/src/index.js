@@ -7,16 +7,15 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
 	<Provider store={store}>
 		<React.StrictMode>
 			<BrowserRouter>
 				<App />
 			</BrowserRouter>
 		</React.StrictMode>
-		,
 	</Provider>,
+	document.getElementById('root'),
 );
 
 //cambia el nombre de la pestaña
