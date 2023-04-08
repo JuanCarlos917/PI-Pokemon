@@ -12,19 +12,12 @@
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
-/* body {
-	background: url('../src/assets/peakpx.jpg') no-repeat;
-
-	background-attachment: fixed;
-	background-size: cover;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-} */
-@media (max-width: 768px) {
-	body {
-		font-size: 0.8rem;
-		background-size: cover;
-	}
+body {
+	background: linear-gradient(
+		to right,
+		var(--pikachu),
+		var(--charmander),
+		var(--squirtle),
+		var(--bulbasaur)
+	);
 }

@@ -1,0 +1,116 @@
+.searchBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	border: 1px solid #e0e0e0;
+	transition: all 0.3s ease;
+}
+
+.inputSearchBar {
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: none;
+	color: var(--charmander);
+	font-size: 1.2rem;
+	outline: none;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.searchBar:focus-within {
+	box-shadow: 0px 0px 10px #ccc;
+}
+
+.searchBar:hover {
+	transform: scale(1.02);
+}
+
+.searchBar:active {
+	transform: scale(0.98);
+}
+
+.searchBar:focus-within .inputSearchBar {
+	width: 80%;
+}
+
+.searchBar:focus-within {
+	background-color: var(--pikachu);
+	color: var(--charmander);
+}
+
+.containerCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	border: 1px solid #e0e0e0;
+	transition: all 0.3s ease;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(5px);
+}
+
+.h3Card {
+	color: var(--charmander);
+	font-size: 1.2rem;
+	outline: none;
+}
+
+.imgCard {
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: none;
+	color: var(--charmander);
+	font-size: 1.2rem;
+	outline: none;
+	animation: fadein 2s;
+	margin-top: -7rem;
+}
+
+.pCard {
+	color: var(--charmander);
+	font-size: 1.2rem;
+	outline: none;
+}
+
+.containerCard:hover {
+	transform: rotate(10deg);
+}
+
+.h3Card:focus {
+	background-color: #e0e0e0;
+	transition: background-color 0.3s ease;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

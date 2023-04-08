@@ -16,13 +16,11 @@ const initialState = {
     types: [],
     pokemonDetail: {},
     pokemonCreated: {},
-    search: '',
     order: '',
-    pagination: 9,
+    pagination: 12,
     pages: 0,
     page: 1,
 };
-
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_POKEMONS:
@@ -48,7 +46,7 @@ function rootReducer(state = initialState, action) {
         case SEARCH_POKEMON:
             return {
                 ...state,
-                search: action.payload,
+                pokemons: action.payload,
             };
         case FILTER_ORDER:
             return {
