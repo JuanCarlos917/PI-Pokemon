@@ -1,0 +1,86 @@
+.navBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0 20px;
+	background-color: var(--squirtle);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	margin-top: 1rem;
+}
+
+.navBarList {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navBarItem {
+	margin-right: 20px;
+}
+
+.navBarHome {
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	color: #fff;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+	transition: all 0.3s ease;
+}
+
+.navBarHome:hover {
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.navBarNewPokemon {
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	color: #fff;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+	transition: all 0.3s ease;
+}
+
+.navBarNewPokemon:hover {
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.navBarHome button:hover,
+.navBarNewPokemon button:hover {
+	transition: all 0.2s ease-in-out;
+	color: #ffcc00;
+	text-shadow: 0 0 5px #ffcc00;
+}
+
+.navBarHome button:hover {
+	transition: all 0.2s ease-in-out;
+	color: #ffcc00;
+	text-shadow: 0 0 5px #ffcc00;
+}
+.navBar button {
+	background-color: transparent;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 1.2rem;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	transition: all 0.3s ease;
+}
+
+.navBar button:hover {
+	background-color: #fff;
+	color: #ffcc00;
+	text-shadow: 0 0 5px #ffcc00;
+}

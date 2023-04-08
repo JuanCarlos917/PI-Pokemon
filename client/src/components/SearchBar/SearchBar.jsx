@@ -32,14 +32,14 @@ export default function SearchBar() {
 	);
 	const searchResults = filteredList.map((pokemon) => (
 		<div key={pokemon.id} className={style.containerCard}>
+			<h3 className={style.h3Card}>{pokemon.name}</h3>
+			<p className={style.pCard}>attack {pokemon.attack}</p>
+			<p className={style.pCard}>defense {pokemon.defense}</p>
 			<img
 				src={pokemon.image}
 				alt={pokemon.name}
 				className={style.imgCard}
 			/>
-			<h3 className={style.h3Card}>{pokemon.name}</h3>
-			<p className={style.pCard}>attack {pokemon.attack}</p>
-			<p className={style.pCard}>defense {pokemon.defense}</p>
 		</div>
 	));
 
