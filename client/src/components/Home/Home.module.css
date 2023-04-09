@@ -79,3 +79,17 @@ h5 {
 	justify-content: center;
 	margin-top: 1rem;
 }
+.buttonHome {
+	background-color: var(--bulbasaur);
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.buttonHome:hover {
+	background-color: #3e8e41;
+	transform: scale(1.1);
+}

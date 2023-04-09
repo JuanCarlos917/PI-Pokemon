@@ -38,6 +38,7 @@ export function getAllTypes() {
 export function getById(id) {
 	return async function (dispatch) {
 		const response = await axios.get(`${BACKEND}/pokemons/${id}`);
+        console.log(response);
 		return dispatch({
 			type: GET_BY_ID,
 			payload: response.data,

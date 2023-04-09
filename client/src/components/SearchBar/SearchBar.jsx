@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPokemon } from '../../redux/actions';
 import style from './SearchBar.module.css';
+import { Link } from 'react-router-dom';
 
 export default function SearchBar() {
 	const [name, setName] = useState('');
@@ -40,6 +41,9 @@ export default function SearchBar() {
 				alt={pokemon.name}
 				className={style.imgCard}
 			/>
+			<Link to={`/detail/${pokemon.id}`}>
+				<button className={style.buttonCard}>See more</button>
+			</Link>
 		</div>
 	));
 
