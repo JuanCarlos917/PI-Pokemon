@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getById } from '../../redux/actions';
 import style from './DetailPokemon.module.css';
+import { Link } from 'react-router-dom';
 
 export default function DetailPokemon() {
     const dispatch = useDispatch();
@@ -32,8 +33,12 @@ export default function DetailPokemon() {
                         <p>Height: {pokemonDetail.height}</p>
                         <p>Weight: {pokemonDetail.weight}</p>
                         <p>Type: {pokemonDetail.type1}</p>
-
                     </div>
+                    <Link to='/home'>
+                        <button className={style.detail__container__info_button}>
+                            Back
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
