@@ -3,7 +3,7 @@ const { PokemonType, Type, Pokemon } = require('../db');
 
 let pokemons = [];
 const allPokemons = [];
-const cantPokemons = 60;
+const cantPokemons = 100;
 
 for (let index = 1; index <= cantPokemons; index++) {
 	allPokemons.push(`https://pokeapi.co/api/v2/pokemon/${index}`);

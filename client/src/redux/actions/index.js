@@ -56,6 +56,27 @@ export function searchPokemon(name) {
 		});
 	};
 }
+
+export function postNewPokemon(payload) {
+	return async function (dispatch) {
+		try {
+			const response = await axios.post(`${BACKEND}/pokemons`, payload);
+			console.log(response);
+			dispatch({
+				type: NEW_POKEMON,
+				payload: response.data,
+			});
+			alert('Pokemon created successfully');
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			alert('Error creating Pokemon');
+			throw error;
+		}
+	};
+}
+
+
 export function clear() {
 	return {
 		type: CLEAR,
@@ -83,15 +104,7 @@ export function pages(page) {
 	};
 }
 
-export function newPokemon(payload) {
-	return async function (dispatch) {
-		const response = await axios.post(`${BACKEND}/pokemons`, payload);
-		return dispatch({
-			type: NEW_POKEMON,
-			payload: response.data,
-		});
-	};
-}
+
 
 export function changePage(page) {
 	return {

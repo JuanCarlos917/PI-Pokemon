@@ -21,6 +21,7 @@ const initialState = {
     pages: 0,
     page: 1,
 };
+
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_POKEMONS:
