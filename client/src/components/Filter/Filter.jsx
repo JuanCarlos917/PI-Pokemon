@@ -48,7 +48,7 @@ export default function Filter() {
 
 	return (
 		<div>
-			<h2>Filter by Type</h2>
+			<h2 className={style.sub__title__filter}>Filter</h2>
 			<select value={selectedType} onChange={handleTypeChange}>
 				<option value='all'>All</option>
 				{types.map((type) => (
@@ -57,10 +57,10 @@ export default function Filter() {
 					</option>
 				))}
 			</select>
-			<div>
-				<button onClick={handleSortAsc}>Sort A to Z</button>
-				<button onClick={handleSortDesc}>Sort Z to A</button>
-				<button onClick={handleClearSort}>Clear Sort</button>
+			<div className={style.div__button__filter}>
+				<button className={style.button__filter} onClick={handleSortAsc}>Sort A to Z</button>
+				<button className={style.button__filter} onClick={handleSortDesc}>Sort Z to A</button>
+				<button className={style.button__filter} onClick={handleClearSort}>Clear Sort</button>
 			</div>
 			<h3>Pokemons:</h3>
 			<div className={style.card}>
