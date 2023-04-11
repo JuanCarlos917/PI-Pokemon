@@ -40,7 +40,10 @@ export default function Filter() {
 	};
 
 	const handleClearSort = () => {
-		dispatch(clearSort());
+		setSelectedType('all'); // Restablecer el estado del tipo seleccionado
+		dispatch(clearSort()); // Restablecer los estados de clasificación en el redux store
+		dispatch(filterPokemonsByType('all')); // Obtener nuevamente la lista completa de pokémons sin filtrar
+		dispatch(getAllPokemons()); // Obtener nuevamente la lista completa de pokémons sin filtrar
 	};
 
 	return (

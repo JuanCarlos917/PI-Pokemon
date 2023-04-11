@@ -48,7 +48,6 @@ function rootReducer(state = initialState, action) {
 				...state,
 				sortByAsc: false,
 				sortByDesc: false,
-				pokemons: [...state]
 			};
 		case SEARCH_POKEMON:
 			return {
