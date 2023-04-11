@@ -97,9 +97,9 @@ export default function FormNewPokemon() {
 	};
 	return (
 		<div>
-        <div>
-            <h1 className={style.title__form}>Create Your Pokemon</h1>
-        </div>
+			<div>
+				<h1 className={style.title__form}>Create Your Pokemon</h1>
+			</div>
 			<form onSubmit={handleSubmit} className={style.formNewPokemon}>
 				<section>
 					<label htmlFor='name'>Name:</label>
@@ -189,11 +189,9 @@ export default function FormNewPokemon() {
 					</select>
 				</section>
 				<div>
-                    <Link to='/home'>
-					<button >
-						Back to home
-					</button>
-                    </Link>
+					<Link to='/home'>
+						<button>Back to home</button>
+					</Link>
 					<button type='submit' className={style.buttonForm}>
 						Add Pokemon
 					</button>

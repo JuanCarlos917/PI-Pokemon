@@ -2,13 +2,15 @@ import {
 	GET_ALL_POKEMONS,
 	GET_ALL_TYPES,
 	GET_BY_ID,
-	CLEAR,
+	CLEAR_SORT,
 	SEARCH_POKEMON,
-	FILTER_ORDER,
+	FILTER_POKEMONS_BY_TYPE,
 	PAGINATION,
 	PAGES,
 	NEW_POKEMON,
 	CHANGE_PAGE,
+	SORT_POKEMONS_BY_DESC,
+	SORT_POKEMONS_BY_ASC,
 } from './actions-types';
 import axios from 'axios';
 
@@ -17,7 +19,7 @@ const BACKEND = 'http://localhost:3001';
 export function getAllPokemons() {
 	return async function (dispatch) {
 		const response = await axios.get(`${BACKEND}/pokemons`);
-        console.log(response);
+		console.log(response);
 		return dispatch({
 			type: GET_ALL_POKEMONS,
 			payload: response.data,
@@ -38,7 +40,7 @@ export function getAllTypes() {
 export function getById(id) {
 	return async function (dispatch) {
 		const response = await axios.get(`${BACKEND}/pokemons/${id}`);
-        console.log(response);
+		console.log(response);
 		return dispatch({
 			type: GET_BY_ID,
 			payload: response.data,
@@ -49,7 +51,7 @@ export function getById(id) {
 export function searchPokemon(name) {
 	return async function (dispatch) {
 		const response = await axios.get(`${BACKEND}/pokemons?name=${name}`);
-        console.log(response);
+		console.log(response);
 		return dispatch({
 			type: SEARCH_POKEMON,
 			payload: response.data,
@@ -76,17 +78,22 @@ export function postNewPokemon(payload) {
 	};
 }
 
+export const sortPokemonsByAsc = () => ({
+	type: SORT_POKEMONS_BY_ASC,
+});
 
-export function clear() {
-	return {
-		type: CLEAR,
-	};
-}
+export const sortPokemonsByDesc = () => ({
+	type: SORT_POKEMONS_BY_DESC,
+});
 
-export function filterOrder(order) {
+export const clearSort = () => ({
+	type: CLEAR_SORT,
+});
+
+export function filterPokemonsByType(type) {
 	return {
-		type: FILTER_ORDER,
-		payload: order,
+		type: FILTER_POKEMONS_BY_TYPE,
+		payload: type,
 	};
 }
 
@@ -103,8 +110,6 @@ export function pages(page) {
 		payload: page,
 	};
 }
-
-
 
 export function changePage(page) {
 	return {
