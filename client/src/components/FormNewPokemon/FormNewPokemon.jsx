@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTypes, postNewPokemon } from '../../redux/actions/index';
+import NavBar from '../NavBar/NavBar';
 import style from './FormNewPokemon.module.css';
 
 export default function FormNewPokemon() {
@@ -97,6 +98,9 @@ export default function FormNewPokemon() {
 	};
 	return (
 		<div>
+        <div>
+            <NavBar/>
+        </div>
 			<div>
 				<h1 className={style.title__form}>Create Your Pokemon</h1>
 			</div>
