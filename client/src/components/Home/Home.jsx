@@ -15,7 +15,7 @@ export default function Home() {
 
 	useEffect(() => {
 		dispatch(getAllPokemons());
-	}, []);
+	});
 
 	const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
 	const handleClick = (page) => {
