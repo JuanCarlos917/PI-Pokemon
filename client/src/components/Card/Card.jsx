@@ -11,7 +11,7 @@ export default function Card() {
 
 	useEffect(() => {
 		dispatch(getAllPokemons());
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<div className={style.card}>

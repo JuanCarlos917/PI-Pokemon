@@ -31,7 +31,7 @@ const getPokemons = async (req, res) => {
 				});
 			});
 		});
-
+//findAll() que devuelve una promesa resolviendo a un arreglo de objetos que representan los registros encontrados en la base de datos.
 		const pokemonsDB = await Pokemon.findAll();
 		pokemons = [...pokemons, ...pokemonsDB];
 

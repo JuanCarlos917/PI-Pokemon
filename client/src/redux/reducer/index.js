@@ -6,7 +6,7 @@ import {
 	SEARCH_POKEMON,
 	FILTER_POKEMONS_BY_TYPE,
 	PAGINATION,
-	PAGES,
+	// PAGES,
 	NEW_POKEMON,
 	CHANGE_PAGE,
 	SORT_POKEMONS_BY_ASC,
@@ -19,9 +19,8 @@ const initialState = {
 	pokemonDetail: {},
 	pokemonCreated: {},
 	filteredPokemons: [],
-	pagination: 12,
-	pages: 0,
-	page: 1,
+	pokemosPage: [],
+	page: '',
 	sortByAsc: false,
 	sortByDesc: false,
 };
@@ -32,6 +31,7 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				pokemons: action.payload,
+				pokemosPage: action.payload,
 			};
 		case GET_ALL_TYPES:
 			return {
@@ -53,6 +53,7 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				pokemons: action.payload,
+				pokemosPage: [action.payload],
 			};
 		case FILTER_POKEMONS_BY_TYPE:
 			const filteredPokemons = state.pokemons.filter(
@@ -86,13 +87,13 @@ function rootReducer(state = initialState, action) {
 		case PAGINATION:
 			return {
 				...state,
-				pagination: action.payload,
+				pokemosPage: action.payload,
 			};
-		case PAGES:
-			return {
-				...state,
-				pages: action.payload,
-			};
+		// case PAGES:
+		// 	return {
+		// 		...state,
+		// 		pages: action.payload,
+		// 	};
 		case NEW_POKEMON:
 			return {
 				...state,

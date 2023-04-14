@@ -18,7 +18,7 @@ const getAllTypesFromApi = async () => {
 
 	return types;
 };
-//unción principal que se exporta a través del módulo para obtener la lista de tipos de Pokemon
+//Función principal que se exporta a través del módulo para obtener la lista de tipos de Pokemon
 const getTypes = async (req, res) => {
 	try {
 		let types = await Type.findAll();
