@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
 	filterPokemonsByType,
+	filterPokemonsByAttack,
 	getAllTypes,
 	getAllPokemons,
 	sortPokemonsByAsc,
@@ -27,23 +28,33 @@ export default function Filter() {
 	}, [selectedType, dispatch]);
 
 	const handleTypeChange = (e) => {
+        e.preventDefault();
 		const type = e.target.value;
 		setSelectedType(type);
 	};
 
-	const handleSortAsc = () => {
+	const handleSortAsc = (e) => {
+        e.preventDefault();
 		dispatch(sortPokemonsByAsc());
 	};
 
-	const handleSortDesc = () => {
+	const handleSortDesc = (e) => {
+        e.preventDefault();
 		dispatch(sortPokemonsByDesc());
 	};
 
-	const handleClearSort = () => {
-		setSelectedType('all'); // Restablecer el estado del tipo seleccionado
-		dispatch(clearSort()); // Restablecer los estados de clasificación en el redux store
-		dispatch(filterPokemonsByType('all')); // Obtener nuevamente la lista completa de pokémons sin filtrar
-		dispatch(getAllPokemons()); // Obtener nuevamente la lista completa de pokémons sin filtrar
+	const handleClearSort = (e) => {
+        e.preventDefault();
+		setSelectedType('all');
+		dispatch(clearSort());
+		dispatch(filterPokemonsByType('all'));
+		dispatch(getAllPokemons());
+	};
+
+	// Función para ordenar los pokémones por ataque
+	const handlePokemonsByAttack = (e) => {
+        e.preventDefault();
+		dispatch(filterPokemonsByAttack());
 	};
 
 	return (
@@ -58,9 +69,26 @@ export default function Filter() {
 				))}
 			</select>
 			<div className={style.div__button__filter}>
-				<button className={style.button__filter} onClick={handleSortAsc}>Sort A to Z</button>
-				<button className={style.button__filter} onClick={handleSortDesc}>Sort Z to A</button>
-				<button className={style.button__filter} onClick={handleClearSort}>Clear Sort</button>
+				<button
+					className={style.button__filter}
+					onClick={handleSortAsc}>
+					Sort A to Z
+				</button>
+				<button
+					className={style.button__filter}
+					onClick={handleSortDesc}>
+					Sort Z to A
+				</button>
+				<button
+					className={style.button__filter}
+					onClick={handleClearSort}>
+					Clear Sort
+				</button>
+				<button
+					className={style.button__filter}
+					onClick={handlePokemonsByAttack}>
+					Sort by Attack
+				</button>
 			</div>
 			<h3>Pokemons:</h3>
 			<div className={style.card}>

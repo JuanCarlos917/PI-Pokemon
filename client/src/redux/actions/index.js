@@ -11,6 +11,7 @@ import {
 	CHANGE_PAGE,
 	SORT_POKEMONS_BY_DESC,
 	SORT_POKEMONS_BY_ASC,
+	SORT_POKEMONS_BY_ATTACK,
 } from './actions-types';
 import axios from 'axios';
 
@@ -96,7 +97,11 @@ export function filterPokemonsByType(type) {
 		payload: type,
 	};
 }
-
+export function filterPokemonsByAttack() {
+	return {
+		type: SORT_POKEMONS_BY_ATTACK,
+	};
+}
 export function pagination(page) {
 	return {
 		type: PAGINATION,

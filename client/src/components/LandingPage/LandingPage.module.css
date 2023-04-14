@@ -1,3 +1,18 @@
+.container__landing {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: 15px;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-image: url(../../assets/LandingPage.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	transition: opacity 0.2s ease-in-out;
+}
+
 .buttonLandingPage {
 	background-color: #4caf50; /* Green */
 	border: none;
@@ -50,13 +65,37 @@
 	object-position: center;
 	opacity: 0.8;
 	border-radius: 10px;
+	transition: opacity 0.2s ease-in-out;
 }
-
+.container__landing:hover {
+	opacity: 1;
+}
 .image {
+	display: flex;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
 	opacity: 0.8;
 	border-radius: 50px;
+}
+.clindren__imageLandingPage {
+}
+.container__landing {
+	/* Otras propiedades... */
+	animation: alternate 2s infinite linear; /* Añade una animación llamada "rotate" con duración de 2 segundos, se repite infinitamente y tiene un ritmo lineal */
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(
+			0deg
+		); /* Define la transformación inicial de la animación */
+	}
+	100% {
+		transform: rotate(
+			360deg
+		); /* Define la transformación final de la animación */
+	}
 }
