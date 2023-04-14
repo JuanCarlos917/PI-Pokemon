@@ -11,7 +11,8 @@ import {
 	CHANGE_PAGE,
 	SORT_POKEMONS_BY_DESC,
 	SORT_POKEMONS_BY_ASC,
-	SORT_POKEMONS_BY_ATTACK,
+	SORT_POKEMONS_BY_ATTACK_ASC,
+	SORT_POKEMONS_BY_ATTACK_DESC,
 } from './actions-types';
 import axios from 'axios';
 
@@ -97,9 +98,14 @@ export function filterPokemonsByType(type) {
 		payload: type,
 	};
 }
-export function filterPokemonsByAttack() {
+export function filterPokemonsByAttackAsc() {
 	return {
-		type: SORT_POKEMONS_BY_ATTACK,
+		type: SORT_POKEMONS_BY_ATTACK_ASC,
+	};
+}
+export function filterPokemonsByAttackDesc() {
+	return {
+		type: SORT_POKEMONS_BY_ATTACK_DESC,
 	};
 }
 export function pagination(page) {

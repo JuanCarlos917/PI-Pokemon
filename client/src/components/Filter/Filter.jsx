@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
 	filterPokemonsByType,
-	filterPokemonsByAttack,
+	filterPokemonsByAttackAsc,
+    filterPokemonsByAttackDesc,
 	getAllTypes,
 	getAllPokemons,
 	sortPokemonsByAsc,
@@ -52,9 +53,13 @@ export default function Filter() {
 	};
 
 	// Función para ordenar los pokémones por ataque
-	const handlePokemonsByAttack = (e) => {
+	const handlePokemonsByAttackAsc = (e) => {
         e.preventDefault();
-		dispatch(filterPokemonsByAttack());
+		dispatch(filterPokemonsByAttackAsc());
+	};
+    const handlePokemonsByAttackDesc = (e) => {
+		e.preventDefault();
+		dispatch(filterPokemonsByAttackDesc());
 	};
 
 	return (
@@ -86,8 +91,13 @@ export default function Filter() {
 				</button>
 				<button
 					className={style.button__filter}
-					onClick={handlePokemonsByAttack}>
-					Sort by Attack
+					onClick={handlePokemonsByAttackAsc}>
+					Sort by Attack Asc
+				</button>
+				<button
+					className={style.button__filter}
+					onClick={handlePokemonsByAttackDesc}>
+					Sort by Attack Desc
 				</button>
 			</div>
 			<h3>Pokemons:</h3>

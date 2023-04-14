@@ -6,12 +6,12 @@ import {
 	SEARCH_POKEMON,
 	FILTER_POKEMONS_BY_TYPE,
 	PAGINATION,
-	// PAGES,
 	NEW_POKEMON,
 	CHANGE_PAGE,
 	SORT_POKEMONS_BY_ASC,
 	SORT_POKEMONS_BY_DESC,
-	SORT_POKEMONS_BY_ATTACK,
+	SORT_POKEMONS_BY_ATTACK_ASC,
+	SORT_POKEMONS_BY_ATTACK_DESC,
 } from '../actions/actions-types';
 
 const initialState = {
@@ -57,10 +57,19 @@ function rootReducer(state = initialState, action) {
 				pokemons: action.payload,
 				pokemosPage: [action.payload],
 			};
-		case SORT_POKEMONS_BY_ATTACK: {
-			// Realizar la clasificación por ataque
+		case SORT_POKEMONS_BY_ATTACK_ASC: {
 			const sortedPokemons = [...state.pokemons].sort((a, b) => {
 				return a.attack - b.attack;
+			});
+
+			return {
+				...state,
+				filteredPokemons: sortedPokemons,
+			};
+		}
+		case SORT_POKEMONS_BY_ATTACK_DESC: {
+			const sortedPokemons = [...state.pokemons].sort((a, b) => {
+				return b.attack - a.attack;
 			});
 
 			return {
@@ -102,11 +111,6 @@ function rootReducer(state = initialState, action) {
 				...state,
 				pokemosPage: action.payload,
 			};
-		// case PAGES:
-		// 	return {
-		// 		...state,
-		// 		pages: action.payload,
-		// 	};
 		case NEW_POKEMON:
 			return {
 				...state,
