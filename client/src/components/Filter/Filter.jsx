@@ -77,12 +77,12 @@ export default function Filter() {
 				<button
 					className={style.button__filter}
 					onClick={handleSortAsc}>
-					Sort A to Z
+					Sort A-Z
 				</button>
 				<button
 					className={style.button__filter}
 					onClick={handleSortDesc}>
-					Sort Z to A
+					Sort Z-A
 				</button>
 				<button
 					className={style.button__filter}
@@ -92,12 +92,12 @@ export default function Filter() {
 				<button
 					className={style.button__filter}
 					onClick={handlePokemonsByAttackAsc}>
-					Sort by Attack Asc
+					Attack Asc
 				</button>
 				<button
 					className={style.button__filter}
 					onClick={handlePokemonsByAttackDesc}>
-					Sort by Attack Desc
+					Attack Desc
 				</button>
 			</div>
 			<h3>Pokemons:</h3>

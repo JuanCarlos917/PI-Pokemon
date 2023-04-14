@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Filter from '../Filter/Filter';
 import style from './Home.module.css';
 
-
 export default function Home() {
 	const dispatch = useDispatch();
 	const [currentPage, setCurrentPage] = useState(1);
@@ -52,9 +51,7 @@ export default function Home() {
 				<h1>Pokemons</h1>
 				<h3>cant: {pokemons.length}</h3>
 			</div>
-			<div className={style.card_footer}>
-				<div className='pagination'>{renderPageNumbers()}</div>
-			</div>
+			<div className='pagination'>{renderPageNumbers()}</div>
 			<div>
 				<Filter />
 			</div>
