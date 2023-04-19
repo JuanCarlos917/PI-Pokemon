@@ -64,7 +64,7 @@ export default function Filter() {
 
 	return (
 		<div>
-			<h2 className={style.sub__title__filter}>Filter</h2>
+			<h2 className={style.sub__title__filter}>Filter Pokemons by...</h2>
 			<select value={selectedType} onChange={handleTypeChange}>
 				<option value='all'>All</option>
 				{types.map((type) => (

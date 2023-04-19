@@ -13,7 +13,7 @@
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
-body {
+/* body {
 	background: linear-gradient(
 		to right,
 		var(--pikachu),
@@ -21,4 +21,14 @@ body {
 		var(--squirtle),
 		var(--bulbasaur)
 	);
+} */
+body {
+	background: url('./assets/LandingPage.jpg') no-repeat;
+
+	background-attachment: fixed;
+	background-size: cover;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
 }
