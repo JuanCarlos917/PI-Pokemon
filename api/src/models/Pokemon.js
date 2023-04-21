@@ -45,9 +45,12 @@ module.exports = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-            type1: {
-                type: DataTypes.STRING,
-            }
+			type1: {
+				type: DataTypes.STRING,
+			},
+			type2: {
+				type: DataTypes.STRING,
+			},
 		},
 		{ timestamps: false },
 	);

@@ -35,12 +35,12 @@ export default function Filter() {
 	};
 
 	const handleSortAsc = (e) => {
-        e.preventDefault();
+
 		dispatch(sortPokemonsByAsc());
 	};
 
 	const handleSortDesc = (e) => {
-        e.preventDefault();
+
 		dispatch(sortPokemonsByDesc());
 	};
 

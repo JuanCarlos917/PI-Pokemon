@@ -26,6 +26,7 @@ const getPokemons = async (req, res) => {
 					speed: data.stats[5].base_stat,
 					image: data.sprites.other.dream_world.front_default,
 					type1: data.types[0].type.name,
+					type2: data.types[1] ? data.types[1].type.name : null,
 					height: data.height,
 					weight: data.weight,
 				});
@@ -62,7 +63,7 @@ const getPokemons = async (req, res) => {
 };
 
 const postPokemon = async (req, res) => {
-	const { name, hp, attack, defense, speed, height, weight, image, type1 } =
+	const { name, hp, attack, defense, speed, height, weight, image, type1,type2 } =
 		req.body;
 
 	// Validar que el nombre del pokemon exista
@@ -100,18 +101,27 @@ const postPokemon = async (req, res) => {
 			weight,
 			image,
 			type1,
+            type2
 		});
 		// se agrega tipo a la db
 		const typeAdd1 = await Type.findOne({
 			where: {
-				name_type: type1,
+				name_type: type1
 			},
 		});
 		await newPokemon.addType(typeAdd1, { through: PokemonType });
+        // si existe un segundo tipo, seagrega a la db
+        if (type2) {
+            const typeAdd2 = await Type.findOne({
+                where: {
+                    name_type: type2
+                },
+            });
+            await newPokemon.addType(typeAdd2, { through: PokemonType });
+        }
 
-		return res.status(200).json(newPokemon);
+		res.json(newPokemon);
 	} catch (err) {
-		console.error(err);
 		return res.status(500).send('error when creating pokemon');
 	}
 };

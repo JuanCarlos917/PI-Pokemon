@@ -32,7 +32,8 @@ export default function DetailPokemon() {
                         <p>Speed: {pokemonDetail.speed}</p>
                         <p>Height: {pokemonDetail.height}</p>
                         <p>Weight: {pokemonDetail.weight}</p>
-                        <p>Type: {pokemonDetail.type1}</p>
+                        <p>Type1: {pokemonDetail.type1}</p>
+                        <p>Type2: {pokemonDetail.type2}</p>
                     </div>
                     <Link to='/home'>
                         <button className={style.detail__container__info_button}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTypes, postNewPokemon } from '../../redux/actions/index';
+import { getAllPokemons, getAllTypes, postNewPokemon } from '../../redux/actions/index';
 import NavBar from '../NavBar/NavBar';
 import style from './FormNewPokemon.module.css';
 
@@ -15,6 +15,7 @@ export default function FormNewPokemon() {
 	};
 	const dispatch = useDispatch();
 	const types = useSelector((state) => state.types);
+	const types2 = useSelector((state) => state.types);
 	const [name, setName] = useState('');
 	const [hp, setHp] = useState(null);
 	const [attack, setAttack] = useState(null);
@@ -24,14 +25,22 @@ export default function FormNewPokemon() {
 	const [weight, setWeight] = useState(null);
 	const [image, setImage] = useState('');
 	const [type1, setType1] = useState('');
+	const [type2, setType2] = useState('');
 
 	useEffect(() => {
 		dispatch(getAllTypes());
+		dispatch(getAllPokemons());
 	}, [dispatch]);
 
 	const handleChangeType = (event) => {
+        event.preventDefault();
 		setType1(event.target.value);
+		const pokemon = types2.find((p) => p.name === event.target.value);
+		if (pokemon && pokemon.types[0]) {
+			setType2(pokemon.types[1].name);
+		}
 	};
+
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -55,6 +64,7 @@ export default function FormNewPokemon() {
 					weight,
 					image,
 					type1,
+                    type2,
 				};
 				await dispatch(postNewPokemon(payload));
 				// Limpiar el formulario después de enviarlo
@@ -67,6 +77,7 @@ export default function FormNewPokemon() {
 				setWeight('');
 				setImage('');
 				setType1('');
+                setType2('');
 				// Actualizar lista de pokemons después de agregar uno nuevo
 			} catch (error) {
 				console.error(error);
@@ -98,9 +109,9 @@ export default function FormNewPokemon() {
 	};
 	return (
 		<div>
-        <div>
-            <NavBar/>
-        </div>
+			<div>
+				<NavBar />
+			</div>
 			<div>
 				<h1 className={style.title__form}>Create Your Pokemon</h1>
 			</div>
@@ -188,6 +199,21 @@ export default function FormNewPokemon() {
 						{types.map((type) => (
 							<option key={type.id} value={type.name}>
 								{type.name_type}
+							</option>
+						))}
+					</select>
+				</section>
+				<section>
+					<select
+						name='type2'
+						id='type2'
+						value={type2}
+						onChange={(e) => handleChangeType(e)}
+						required>
+						<option value=''>Select a type 2</option>
+						{types2.map((typeDos) => (
+							<option key={typeDos.id} value={typeDos.name}>
+								{typeDos.name_type}
 							</option>
 						))}
 					</select>
